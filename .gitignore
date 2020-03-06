@@ -1,2 +1,3 @@
-/raw.nosync/*
-/.idea/*
+raw.nosync/*
+.idea/*
+venv/*
