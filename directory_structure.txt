@@ -1,0 +1,147 @@
+.
+├── 01_preprocessing
+│   ├── 01_userIDToFile.py
+│   ├── 02_businessIDToFile.py
+│   ├── 03_tipUserIDBusinessIDToFile.py
+│   ├── 04_reviewUserIDBusinessIDToFile.py
+│   ├── 05_photoBusinessIDToFile.py
+│   ├── 06_checkinBusinessIDToFile.py
+│   ├── 07_userCheck.py
+│   ├── 08_businessCheck.py
+│   ├── 09_userClean.py
+│   ├── 10_userFieldLenCheck.py
+│   ├── 11_businessFieldLenCheck.py
+│   ├── 12_tipFieldLenCheck.py
+│   ├── 13_reviewFieldLenCheck.py
+│   ├── 14_photoFieldLenCheck.py
+│   ├── 15_businessAttributesCheck.py
+│   ├── 16_businessNestedAttributesCheck.py
+│   ├── 17_businessReplaceU.py
+│   └── 18_userRelationCheck.py
+├── 02_getTablesData
+│   ├── 01_getAttributes.py
+│   ├── 02_getCategory.py
+│   ├── 03_getCheckin.py
+│   ├── 04_getElite.py
+│   ├── 05_getFriends.py
+│   └── 06_getHours.py
+├── 03_dumpData
+│   ├── 00_createTables.sql
+│   ├── 01_insertUsers.py
+│   ├── 02_insertFriends.py
+│   ├── 03_insertEliteYears.py
+│   ├── 04_insertBusiness.py
+│   ├── 05_insertReviews.py
+│   ├── 06_insertTips.py
+│   ├── 07_insertAttributes.py
+│   ├── 08_insertAttributeXBusiness.py
+│   ├── 09_insertBusinessHours.py
+│   ├── 10_insertCategories.py
+│   ├── 11_insertCategoryXBusiness.py
+│   ├── 12_insertCheckin.py
+│   └── 13_insertPhotos.py
+├── 04_serverAndClient
+│   ├── apiTest.sql
+│   ├── client.py
+│   └── server.py
+├── 05_dataMining
+│   ├── 01_plot.ipynb
+│   ├── 02_classification.ipynb
+│   ├── AdaBoost(PCA)\ Confusion\ Matrix.png
+│   ├── Decision\ Tree(PCA)\ Confusion\ Matrix.png
+│   ├── KNN(PCA)\ Confusion\ Matrix.png
+│   ├── Logistic\ Regression\ Confusion\ Matrix.png
+│   ├── Logistic\ Regression(PCA)\ Confusion\ Matrix.png
+│   ├── Naive\ Bayes\ Confusion\ Matrix.png
+│   ├── Random\ Forest\ Confusion\ Matrix.png
+│   ├── Random\ Forest(PCA)\ Confusion\ Matrix.png
+│   ├── SHP
+│   │   ├── USA_Canada_ShapefileMerge.dbf
+│   │   ├── USA_Canada_ShapefileMerge.prj
+│   │   ├── USA_Canada_ShapefileMerge.sbn
+│   │   ├── USA_Canada_ShapefileMerge.sbx
+│   │   ├── USA_Canada_ShapefileMerge.shp
+│   │   ├── USA_Canada_ShapefileMerge.shp.xml
+│   │   └── USA_Canada_ShapefileMerge.shx
+│   ├── checkinTimeVSDay.png
+│   ├── distributionAllCategories.png
+│   ├── distributionBusinessGeo.png
+│   ├── distributionBusinessStars.png
+│   ├── distributionBusinessStarsPie.png
+│   ├── distributionNumUserReviews.png
+│   ├── distributionRestaurants.png
+│   ├── distributionUsefulWordCount.png
+│   ├── distributionUserRegisterTime.png
+│   ├── distributionUserRegisterTimeStars.png
+│   ├── eliteVSNormalUsers.png
+│   └── getSample.py
+├── 06_report
+│   ├── report.aux
+│   ├── report.log
+│   ├── report.out
+│   ├── report.pdf
+│   └── report.tex
+├── README.md
+├── directory_structure.txt
+├── project.pdf
+└── raw.nosync
+    ├── attributeJunc.txt
+    ├── attributes.txt
+    ├── business.txt
+    ├── businessAttr.txt
+    ├── businessInCheckin.txt
+    ├── businessInPhoto.txt
+    ├── businessInReviews.txt
+    ├── businessInTips.txt
+    ├── categories.txt
+    ├── categoryJunc.txt
+    ├── checkin.txt
+    ├── cleanUsers
+    │   ├── user1.json
+    │   ├── user2.json
+    │   ├── user3.json
+    │   ├── user4.json
+    │   ├── user5.json
+    │   ├── user6.json
+    │   └── user7.json
+    ├── elite.txt
+    ├── friends.txt
+    ├── hours.txt
+    ├── nestedAttr.txt
+    ├── normalAttr.txt
+    ├── reviewSample.csv
+    ├── usersAll.txt
+    ├── usersInReviews.txt
+    ├── usersInTips.txt
+    ├── usersWithInfo.txt
+    ├── usersWithoutInfo.txt
+    └── yelp_dataset
+        ├── business.json
+        ├── checkin.json
+        ├── photo.json
+        ├── review
+        │   ├── review1.json
+        │   ├── review10.json
+        │   ├── review11.json
+        │   ├── review12.json
+        │   ├── review13.json
+        │   ├── review14.json
+        │   ├── review2.json
+        │   ├── review3.json
+        │   ├── review4.json
+        │   ├── review5.json
+        │   ├── review6.json
+        │   ├── review7.json
+        │   ├── review8.json
+        │   └── review9.json
+        ├── tip.json
+        └── user
+            ├── user1.json
+            ├── user2.json
+            ├── user3.json
+            ├── user4.json
+            ├── user5.json
+            ├── user6.json
+            └── user7.json
+
+12 directories, 132 files
