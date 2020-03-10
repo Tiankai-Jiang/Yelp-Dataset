@@ -142,10 +142,17 @@ def followu():
         if u == f:
             return jsonify({"status": 1, "message": "You cannot follow yourself!"})
         try:
-            cur.execute('begin;')
-            cur.execute('INSERT INTO UserFollowers(user_id1, user_id2) VALUES (%s, %s);', (u, f))
-            cur.execute('commit;')
-            return jsonify({"status": 0, "message": "Success"})
+            cur.execute('SELECT count(*) as c FROM UserFollowers WHERE user_id1=%s AND user_id2=%s ;', (u, f))
+            if cur.fetchone()['c'] > 0:
+                cur.execute('begin;')
+                cur.execute('DELETE FROM UserFollowers WHERE user_id1=%s AND user_id2=%s;', (u, f))
+                cur.execute('commit;')
+                return jsonify({"status": 0, "message": "Unfollowed"})
+            else:
+                cur.execute('begin;')
+                cur.execute('INSERT INTO UserFollowers(user_id1, user_id2) VALUES (%s, %s);', (u, f))
+                cur.execute('commit;')
+                return jsonify({"status": 0, "message": "Followed"})
         except Exception as e:
             cur.execute('rollback;')
             return jsonify({"status": 1, "message": str(e)})
@@ -159,10 +166,17 @@ def followb():
     b = request.args.get('b')
     if u and b:
         try:
-            cur.execute('begin;')
-            cur.execute('INSERT INTO BusinessFollowers(user_id, business_id) VALUES (%s, %s);', (u, b))
-            cur.execute('commit;')
-            return jsonify({"status": 0, "message": "Success"})
+            cur.execute('SELECT count(*) as c FROM BusinessFollowers WHERE user_id=%s AND business_id=%s ;', (u, b))
+            if cur.fetchone()['c'] > 0:
+                cur.execute('begin;')
+                cur.execute('DELETE FROM BusinessFollowers WHERE user_id=%s AND business_id=%s;', (u, b))
+                cur.execute('commit;')
+                return jsonify({"status": 0, "message": "Unfollowed"})
+            else:           
+                cur.execute('begin;')
+                cur.execute('INSERT INTO BusinessFollowers(user_id, business_id) VALUES (%s, %s);', (u, b))
+                cur.execute('commit;')
+                return jsonify({"status": 0, "message": "Followed"})
         except Exception as e:
             cur.execute('rollback;')
             return jsonify({"status": 1, "message": str(e)})
