@@ -2,12 +2,18 @@ import sys, requests, json
 url = 'http://127.0.0.1:5000/yelp/'
 user_id = ''
 while(user_id==''):
-    print('Enter user_id to login:')
-    uid = sys.stdin.readline()[:-1]
-    resp = requests.get(url + 'login?u=' + uid)
-    if json.loads(resp.json())['status'] == 0:
-        user_id = uid
-    print('\n' + resp.json() + '\n')
+    print('1) Login\n2) Register')
+    opt = sys.stdin.readline()[:-1]
+    if opt == '1':
+        print('Enter user_id:')
+        resp = requests.get(url + 'login?u=' + sys.stdin.readline()[:-1])
+        if resp.json()['status'] == 0: user_id = resp.json()['message']
+        print(json.dumps(resp.json(), indent=1))
+    elif opt == '2':
+        print('Enter new username:')
+        resp = requests.get(url + 'newuser?n=' + sys.stdin.readline()[:-1])
+        if resp.json()['status'] == 0: user_id = resp.json()['message']
+        print(json.dumps(resp.json(), indent=1))
 
 while(True):
     print('1) Star/Unstar a review\n2) New post\n3) Follow a user\n4) Follow a business\n5) Get new posts by people you followed\n6) Get new posts by business you followed\n7) Exit')
@@ -32,4 +38,4 @@ while(True):
         resp = requests.get(url + 'fbposts?u=' + user_id)
     else:
         break
-    print('\n' + str(resp.json()) + '\n')
+    print(json.dumps(resp.json(), indent=1))
