@@ -5,6 +5,9 @@
 \usepackage{commath}
 \usepackage{subfig}
 \usepackage{float}
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
 \oddsidemargin 0pt
 \evensidemargin 0pt
 \marginparwidth 40pt
@@ -33,6 +36,7 @@
 \setlength{\@fptop}{0pt}
 \makeatother
 \bibliographystyle{ieeetr}
+
 \begin{document}
 
 \maketitle
@@ -52,11 +56,11 @@ Remove all user\_ids that appear only in friends list but not in "user\_id" colu
 \section{Relational Database}\label{section-database}
 \subsection{Design}
 The ER Diagram of the database is shown as follows. The primary key of a table is in bold and the foreign keys are highlighted in light blue.
-\begin{figure}[H]
-\begin{center}
-    \includegraphics[width=1.0\textwidth]{ER_Diagram.png}
-\end{center}
-\end{figure}
+% \begin{figure}[H]
+% \begin{center}
+%     \includegraphics[width=1.0\textwidth]{ER_Diagram.png}
+% \end{center}
+% \end{figure}
 Five main tables in the diagram are {\it Users}, {\it Business}, {\it Reviews}, {\it Photos} and {\it Tips}. Each row of table {\it EliteYears} stores a user\_id and a year number. Table {\it Friends} stores pairs of users. Table {\it Attributes} and table {\it Categories} store ids and names of attributes/categories and connect with {\it Business} through junction table {\it AttributeXBusiness} and {\it CategoryXBusiness}. All values of attributes are stored as string no matter the value is "True"/"False" or a dictionary since they are not our focus in the following analysis, and spliting all of them apart will complicate the design. Table {\it BusinessHours} stores the hours of a business, each day per row, and days are expressed in three characters, from "Mon" to "Sun". Table {\it UserFollowers, BusinessFollowers, ReadReviews} and {\it UserStars} are used for the api and they are not part of the original data.
 \subsection{Dumping Data}
 Extract all data for tables from json files into individual files, at the same time adding required missing fields such as tip\_id, and then write those files to database. Files should be read as raw string since there are lots of special characters in them.
@@ -71,10 +75,17 @@ Login as an existing user.\\
 \textbf{API call:}\\ 
 http://127.0.0.1:5000/yelp/login?u=\{user\_id\}\\
 \textbf{Parameters:}\\
-user\_id: your user\_id
-\textbf{API Response:}\\
+user\_id: your user\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
 \begin{lstlisting}
+{
+ "message": "___DPmKJsBF2X6ZKgAeGqg",
+ "status": 0
+}
 \end{lstlisting}
+\end{singlespacing}
 
 \subsubsection{Register}
 \textbf{Description:}\\
@@ -82,7 +93,17 @@ Register a new user account.\\
 \textbf{API call:}\\
 http://127.0.0.1:5000/yelp/newuser?n=\{username\}\\
 \textbf{Parameters:}\\
-username: username for the new account
+username: username for the new account\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": "qkVPN3ZeXKxD-2y_bewUEk",
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
 
 \subsubsection{Star/Unstar}
 \textbf{Description:}\\
@@ -91,7 +112,17 @@ Star/Unstar a review.\\
 http://127.0.0.1:5000/yelp/star?u=\{user\_id\}\&r=\{review\_id\}\\
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
-review\_id: an existing review\_id
+review\_id: an existing review\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": "Starred",
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
 
 \subsubsection{New Review}
 \textbf{Description:}\\
@@ -101,7 +132,17 @@ http://127.0.0.1:5000/yelp/newpost?u=\{user\_id\}\&b=\{business\_id\}\&r=\{conte
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
 business\_id: the business\_id of the business you want to comment on\\
-content: review content
+content: review content\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": "NnoOqAoBXsoqOWJVsTakBK",
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
 
 \subsubsection{Follow/Unfollow a User}
 \textbf{Description:}\\
@@ -110,7 +151,17 @@ Follow/Unfollow a user.\\
 http://127.0.0.1:5000/yelp/followu?u=\{user\_id1\}\&f=\{user\_id2\}\\
 \textbf{Parameters:}\\
 user\_id1: your user\_id\\
-user\_id2: user\_id of the person you want to follow
+user\_id2: user\_id of the person you want to follow\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": "Unfollowed",
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
 
 \subsubsection{Follow/Unfollow a Business}
 \textbf{Description:}\\
@@ -119,7 +170,17 @@ Follow/Unfollow a business.\\
 http://127.0.0.1:5000/yelp/followb?u=\{user\_id\}\&b=\{business\_id\}\\
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
-business\_id: business\_id of the business you want to follow
+business\_id: business\_id of the business you want to follow\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": "Followed",
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
 
 \subsubsection{Get All New Reviews1}
 \textbf{Description:}\\
@@ -127,7 +188,27 @@ Get all new reviews by people you have followed.\\
 \textbf{API call:}\\ 
 http://127.0.0.1:5000/yelp/ffposts?u=\{user\_id\}\\
 \textbf{Parameters:}\\
-user\_id: your user\_id
+user\_id: your user\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": [
+  {
+   "business_id": "Review content1",
+   "reviewer": "___DPmKJsBF2X6ZKgAeGqg"
+  },
+  {
+   "business_id": "Review content2",
+   "review_id": "GGg4KdkyvbdHwdwsC46l7g",
+   "reviewer": "___DPmKJsBF2X6ZKgAeGqg"
+  }
+ ],
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
 
 \subsubsection{Get All New Reviews2}
 \textbf{Description:}\\
@@ -135,8 +216,32 @@ Get all new reviews of the business you have followed.\\
 \textbf{API call:}\\ 
 http://127.0.0.1:5000/yelp/fbposts?u=\{user\_id\}\\
 \textbf{Parameters:}\\
-user\_id: your user\_id
+user\_id: your user\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": [
+  {
+   "business_id": "Review content1",
+   "reviewer": "___DPmKJsBF2X6ZKgAeGqg"
+  },
+  {
+   "business_id": "Review content2",
+   "review_id": "GGg4KdkyvbdHwdwsC46l7g",
+   "reviewer": "___QCazm0YrHLd3uNUPYMA"
+  }
+ ],
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
 
 \subsection{Client}
 A simple client to test the api.
+
+\section{Data Mining}\label{section-datamining}
+\subsection{Data Visualization}
+
 \end{document}
