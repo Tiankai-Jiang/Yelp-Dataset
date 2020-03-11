@@ -53,8 +53,8 @@ Remove all user\_ids that appear only in friends list but not in "user\_id" colu
 The ER Diagram of the database is shown as follows. The primary key of a table is in bold and the foreign keys are highlighted in light blue.
 \begin{figure}[H]
 \begin{center}
-    \includegraphics[width=1.0\textwidth]{../03_dumpData/ER_Diagram.png}
+    \includegraphics[width=1.0\textwidth]{ER_Diagram.png}
 \end{center}
-
 \end{figure}
+Five main tables in the diagram are {\it Users}, {\it Business}, {\it Reviews}, {\it Photos} and {\it Tips}. Each row of table {\it EliteYears} stores a user\_id and a year number. Table {\it Friends} stores pairs of users. Table {\it Attributes} and table {\it Categories} store ids and names of attributes/categories and connect with {\it Business} through junction table {\it AttributeXBusiness} and {\it CategoryXBusiness}. All values of attributes are stored as string no matter the value is "True"/"False" or a dictionary since they are not our focus in the following analysis, and spliting all of them apart will complicate the design. Table {\it BusinessHours} stores the hours of a business, each day per row, and days are expressed in three characters, from "Mon" to "Sun". Table {\it UserFollowers, BusinessFollowers, ReadReviews} and {\it UserStars} are used for the api and they are not part of the original data.
 \end{document}
