@@ -56,11 +56,11 @@ Remove all user\_ids that appear only in friends list but not in "user\_id" colu
 \section{Relational Database}\label{section-database}
 \subsection{Design}
 The ER Diagram of the database is shown as follows. The primary key of a table is in bold and the foreign keys are highlighted in light blue.
-% \begin{figure}[H]
-% \begin{center}
-%     \includegraphics[width=1.0\textwidth]{ER_Diagram.png}
-% \end{center}
-% \end{figure}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{ER_Diagram.png}
+\end{center}
+\end{figure}
 Five main tables in the diagram are {\it Users}, {\it Business}, {\it Reviews}, {\it Photos} and {\it Tips}. Each row of table {\it EliteYears} stores a user\_id and a year number. Table {\it Friends} stores pairs of users. Table {\it Attributes} and table {\it Categories} store ids and names of attributes/categories and connect with {\it Business} through junction table {\it AttributeXBusiness} and {\it CategoryXBusiness}. All values of attributes are stored as string no matter the value is "True"/"False" or a dictionary since they are not our focus in the following analysis, and spliting all of them apart will complicate the design. Table {\it BusinessHours} stores the hours of a business, each day per row, and days are expressed in three characters, from "Mon" to "Sun". Table {\it UserFollowers, BusinessFollowers, ReadReviews} and {\it UserStars} are used for the api and they are not part of the original data.
 \subsection{Dumping Data}
 Extract all data for tables from json files into individual files, at the same time adding required missing fields such as tip\_id, and then write those files to database. Files should be read as raw string since there are lots of special characters in them.
@@ -243,5 +243,84 @@ A simple client to test the api.
 
 \section{Data Mining}\label{section-datamining}
 \subsection{Data Visualization}
+\subsubsection{Top 20 Categories in Business}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/distributionAllCategories.png}
+\end{center}
+\end{figure}
+\subsubsection{Top 50 Categories in Restaurants}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/distributionRestaurants.png}
+\end{center}
+\end{figure}
+Since basically every restaurant has attribute {\it Restaurant} and {\it Food}, we plot the graph starting from the third most attribute.
 
+\subsubsection{Distribution of Business Score}
+\begin{figure}[H]
+\captionsetup[subfigure]{labelformat=empty}
+\centering
+\subfloat[]{\includegraphics[width=0.6\textwidth]{../05_dataMining/distributionBusinessStars.png}}
+\subfloat[] {\includegraphics[width=0.4\textwidth]{../05_dataMining/distributionBusinessStarsPie.png}}
+\end{figure}
+About 80 percent of the business has a score greater or equal than 3.0.
+
+\subsubsection{Geographical Distribution of the Business}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/distributionBusinessGeo.png}
+\end{center}
+\end{figure}
+We can get from the plot where are the 10 metropolitan areas that the data came from. Most of them are from the USA and Canada, a small amount of reviews from Alaska and the UK are not shown on this plot.
+
+\subsubsection{Distribution of Registered Users Over Time}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/distributionUserRegisterTime.png}
+\end{center}
+\end{figure}
+The peak of the user register time is from 2014 to 2016.
+
+\subsubsection{User Satisfaction VS User Register Time}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/distributionUserRegisterTimeStars.png}
+\end{center}
+\end{figure}
+The newer a user is, the more likely he/she will give a lower score to a business, which means the users are more and more difficult to satisfy over time.
+
+\subsubsection{Comparison Between Normal Users and Elite Users}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/eliteVSNormalUsers.png}
+\end{center}
+\end{figure}
+On average, an elite user has more than 600 useful count, 200 review count, 300 funny count, 400 cool count and 20 fans, which are dozens to hundreds of times greater than those of the normal users. It is indeed not easy to become an elite user.
+
+\subsubsection{Distribution of the User Review Number}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/distributionNumUserReviews.png}
+\end{center}
+\end{figure}
+More than 90 percent of users have less or equal than 10 reviews.
+
+\subsubsection{User Checkin Time for Each Day in a Week}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/checkinTimeVSDay.png}
+\end{center}
+\end{figure}
+Users are more likely to check in on a business from 7PM to 2 AM, which is reasonable because people were off work and finished their dinner around that time. And there are most checkins on Sunday and Monday, which is probably because people went to that restaurant or store on Saturday and Sunday, and one day later they wrote reviews about that business.
+
+\subsubsection{Useful number VS Word Count in a Review}
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{../05_dataMining/distributionUsefulWordCount.png}
+\end{center}
+\end{figure}
+The more words in a review, the more likely it is tagged as useful.
+\subsection{Classification}
+We perform classification on review stars(1.0 to 5.0) based on the content of a review.
 \end{document}
