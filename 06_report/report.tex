@@ -49,7 +49,8 @@ The most complex part is the attributes and categories in business information. 
 Furthermore, some fields in business.json contain a leading letter "u", e.g. u"True", which means a unicode string. We should remove letter "u" since "True" and u"True" have the same meaning.
 \subsection{Data Cleaning}
 Remove all user\_ids that appear only in friends list but not in "user\_id" column from user.json. And remove all character "u" before texts from business.json.
-\section{Database Design}\label{section-dbdesign}
+\section{Relational Database}\label{section-database}
+\subsection{Design}
 The ER Diagram of the database is shown as follows. The primary key of a table is in bold and the foreign keys are highlighted in light blue.
 \begin{figure}[H]
 \begin{center}
@@ -57,4 +58,85 @@ The ER Diagram of the database is shown as follows. The primary key of a table i
 \end{center}
 \end{figure}
 Five main tables in the diagram are {\it Users}, {\it Business}, {\it Reviews}, {\it Photos} and {\it Tips}. Each row of table {\it EliteYears} stores a user\_id and a year number. Table {\it Friends} stores pairs of users. Table {\it Attributes} and table {\it Categories} store ids and names of attributes/categories and connect with {\it Business} through junction table {\it AttributeXBusiness} and {\it CategoryXBusiness}. All values of attributes are stored as string no matter the value is "True"/"False" or a dictionary since they are not our focus in the following analysis, and spliting all of them apart will complicate the design. Table {\it BusinessHours} stores the hours of a business, each day per row, and days are expressed in three characters, from "Mon" to "Sun". Table {\it UserFollowers, BusinessFollowers, ReadReviews} and {\it UserStars} are used for the api and they are not part of the original data.
+\subsection{Dumping Data}
+Extract all data for tables from json files into individual files, at the same time adding required missing fields such as tip\_id, and then write those files to database. Files should be read as raw string since there are lots of special characters in them.
+\section{Server and Client}\label{section-api}
+Flask is used as the web framework.
+\subsection{API}
+8 operations are supported in the API. The status in the responsed json will be 0 if the operation succeeded, otherwise 1, with the error message in message field.
+
+\subsubsection{Login}
+\textbf{Description:}\\
+Login as an existing user.\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/login?u=\{user\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id
+\textbf{API Response:}\\
+\begin{lstlisting}
+\end{lstlisting}
+
+\subsubsection{Register}
+\textbf{Description:}\\
+Register a new user account.\\
+\textbf{API call:}\\
+http://127.0.0.1:5000/yelp/newuser?n=\{username\}\\
+\textbf{Parameters:}\\
+username: username for the new account
+
+\subsubsection{Star/Unstar}
+\textbf{Description:}\\
+Star/Unstar a review.\\
+\textbf{API call:}\\
+http://127.0.0.1:5000/yelp/star?u=\{user\_id\}\&r=\{review\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+review\_id: an existing review\_id
+
+\subsubsection{New Review}
+\textbf{Description:}\\
+Post a new review\\
+\textbf{API call:}\\
+http://127.0.0.1:5000/yelp/newpost?u=\{user\_id\}\&b=\{business\_id\}\&r=\{content\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+business\_id: the business\_id of the business you want to comment on\\
+content: review content
+
+\subsubsection{Follow/Unfollow a User}
+\textbf{Description:}\\
+Follow/Unfollow a user.\\
+\textbf{API call:}\\
+http://127.0.0.1:5000/yelp/followu?u=\{user\_id1\}\&f=\{user\_id2\}\\
+\textbf{Parameters:}\\
+user\_id1: your user\_id\\
+user\_id2: user\_id of the person you want to follow
+
+\subsubsection{Follow/Unfollow a Business}
+\textbf{Description:}\\
+Follow/Unfollow a business.\\
+\textbf{API call:}\\
+http://127.0.0.1:5000/yelp/followb?u=\{user\_id\}\&b=\{business\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+business\_id: business\_id of the business you want to follow
+
+\subsubsection{Get All New Reviews1}
+\textbf{Description:}\\
+Get all new reviews by people you have followed.\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/ffposts?u=\{user\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id
+
+\subsubsection{Get All New Reviews2}
+\textbf{Description:}\\
+Get all new reviews of the business you have followed.\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/fbposts?u=\{user\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id
+
+\subsection{Client}
+A simple client to test the api.
 \end{document}
