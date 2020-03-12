@@ -322,5 +322,60 @@ Users are more likely to check in on a business from 7PM to 2 AM, which is reaso
 \end{figure}
 The more words in a review, the more likely it is tagged as useful.
 \subsection{Classification}
-We perform classification on review stars(1.0 to 5.0) based on the content of a review.
+We perform classification on review stars(1.0 to 5.0) based on the content of a review. 125,000 reviews are selected for the classification, in which 80\% are used for training and 20\% are used for testing. We cannot preform classifiers on texts directly, so the texts are converted to a matrix of TF-IDF features using TfidfVectorizer in sklearn.
+\subsubsection{Classification without PCA}
+Apply Naive Bayes Classifier, Logistic Regression and Random Forest Classifier on the training data. (Timeout on other classifiers.) Then plot their confusion matrices using testing data.
+\begin{figure}[H]
+\captionsetup[subfigure]{labelformat=empty}
+\centering
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/Naive Bayes Confusion Matrix"}}
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/Logistic Regression Confusion Matrix"}}
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/Random Forest Confusion Matrix"}}
+\end{figure}
+We can see that all of these three classifiers can classify the 1 and 5 stars reviews really well. But they tend to predict 4 and 3 stars and sometimes even 2 stars reviews as 5 stars reviews. And they also tend to predict 2 stars reviews as 1 star reviews. Overall, 2 stars reviews are the most difficult ones to predict, following by 3 stars and 4 stars because the words used in those reviews are really similar to each other and sometimes even a human cannot tell which class they should be in. If we specify that a review that greater or equal to 3 stars is good and otherwise is bad, and do a binary classification, the result will be much better.
+
+We can get the most positively related words and the most negatively related words in the review from the trained logistic regression model. Those words play a decisive role in the classification. Their wordclouds with top 20 words are shown below:
+\begin{figure}[H]
+\captionsetup[subfigure]{labelformat=empty}
+\centering
+\subfloat[]{\includegraphics[width=0.5\textwidth]{"../05_dataMining/Logistic Regression Worst Words"}}
+\subfloat[]{\includegraphics[width=0.5\textwidth]{"../05_dataMining/Logistic Regression Best Words"}}
+\end{figure}
+
+For random forest classifier, we cannot distinguish the "best" and the "worst" words, but we can still get the crucial words. The wordcloud with top 30 words are shown below:
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{"../05_dataMining/Random Forest Top Words"}
+\end{center}
+\end{figure}
+\subsubsection{Classification with PCA}
+The dimension of the raw data is rather high, making it impossible to run some algorithms. We first run standard scalar on the data, which is required by PCA. Then we draw the scree plot of PCA.
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{../05_dataMining/ScreePlot.png}
+\end{center}
+\end{figure}
+From the scree plot we know that each of the selected components explains a really small percentage of varince. Based on the plot, we use n\_components=50 to process our data.
+
+Then, we apply logistic regression, random forest, adaboost, LDA, decision tree and KNN classifiers on it. (PCA makes some value negative, therefore we cannot use Naive Bayes classifier. Also, Naive Bayes based on applying Bayes' theorem with strong independence assumptions between the features, and preprocessing will seriously impact the result.) Their confusion matrices are as below:
+\begin{figure}[H]
+\captionsetup[subfigure]{labelformat=empty}
+\centering
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/Logistic Regression(PCA) Confusion Matrix"}}
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/Random Forest(PCA) Confusion Matrix"}}
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/AdaBoost(PCA) Confusion Matrix"}}
+\end{figure}
+\vspace*{-1.5cm}
+\begin{figure}[H]
+\captionsetup[subfigure]{labelformat=empty}
+\centering
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/LDA(PCA) Confusion Matrix"}}
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/Decision Tree(PCA) Confusion Matrix"}}
+\subfloat[]{\includegraphics[width=0.33\textwidth]{"../05_dataMining/KNN(PCA) Confusion Matrix"}}
+\end{figure}
+Desision Tree classifier generates the worst result. It is merely better than random guess when predicting the 2, 3 and 4 stars revivews.
+
+The performance of KNN and Adaboost is average. After PCA, the accuracy of both Logistic Regreesion and Random Forest decreases a bit. But Logistic regression is still the best method to split different reviews. And LDA is also a good method on this problem. 
+
+However, most classifiers run under default parameters, with grid search to find better parameters and other preprocessing methods, the performance of these classifiers may be better.
 \end{document}

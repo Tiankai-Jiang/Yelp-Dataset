@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  11 MAR 2020 16:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  11 MAR 2020 22:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -415,20 +415,20 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<ER_Diagram.png, id=107, 935.35448pt x 1039.78462pt>
+<ER_Diagram.png, id=147, 935.35448pt x 1039.78462pt>
 File: ER_Diagram.png Graphic file (type png)
 <use ER_Diagram.png>
 Package pdftex.def Info: ER_Diagram.png  used on input line 61.
 (pdftex.def)             Requested size: 480.59505pt x 534.2496pt.
  [2] [3 <./ER_Diagram.png>] [4] [5] [6] [7] [8] [9]
-<../05_dataMining/distributionAllCategories.png, id=208, 614.295pt x 507.3354pt
+<../05_dataMining/distributionAllCategories.png, id=248, 614.295pt x 507.3354pt
 >
 File: ../05_dataMining/distributionAllCategories.png Graphic file (type png)
 <use ../05_dataMining/distributionAllCategories.png>
 Package pdftex.def Info: ../05_dataMining/distributionAllCategories.png  used o
 n input line 249.
 (pdftex.def)             Requested size: 480.59505pt x 396.9199pt.
-<../05_dataMining/distributionRestaurants.png, id=209, 894.41351pt x 512.82793p
+<../05_dataMining/distributionRestaurants.png, id=249, 894.41351pt x 512.82793p
 t>
 File: ../05_dataMining/distributionRestaurants.png Graphic file (type png)
 <use ../05_dataMining/distributionRestaurants.png>
@@ -436,14 +436,14 @@ Package pdftex.def Info: ../05_dataMining/distributionRestaurants.png  used on
 input line 255.
 (pdftex.def)             Requested size: 480.59505pt x 275.55356pt.
  [10 <../05_dataMining/distributionAllCategories.png>]
-<../05_dataMining/distributionBusinessStars.png, id=216, 614.295pt x 333.59831p
+<../05_dataMining/distributionBusinessStars.png, id=256, 614.295pt x 333.59831p
 t>
 File: ../05_dataMining/distributionBusinessStars.png Graphic file (type png)
 <use ../05_dataMining/distributionBusinessStars.png>
 Package pdftex.def Info: ../05_dataMining/distributionBusinessStars.png  used o
 n input line 264.
 (pdftex.def)             Requested size: 288.35995pt x 156.5978pt.
-<../05_dataMining/distributionBusinessStarsPie.png, id=217, 561.97153pt x 576.4
+<../05_dataMining/distributionBusinessStarsPie.png, id=257, 561.97153pt x 576.4
 2552pt>
 File: ../05_dataMining/distributionBusinessStarsPie.png Graphic file (type png)
 
@@ -452,7 +452,7 @@ Package pdftex.def Info: ../05_dataMining/distributionBusinessStarsPie.png  use
 d on input line 265.
 (pdftex.def)             Requested size: 192.23508pt x 197.17827pt.
  [11 <../05_dataMining/distributionRestaurants.png>]
-<../05_dataMining/distributionBusinessGeo.png, id=224, 1225.2174pt x 587.5551pt
+<../05_dataMining/distributionBusinessGeo.png, id=264, 1225.2174pt x 587.5551pt
 >
 File: ../05_dataMining/distributionBusinessGeo.png Graphic file (type png)
 <use ../05_dataMining/distributionBusinessGeo.png>
@@ -461,7 +461,7 @@ input line 272.
 (pdftex.def)             Requested size: 480.59505pt x 230.47244pt.
  [12 <../05_dataMining/distributionBusinessStars.png> <../05_dataMining/distrib
 utionBusinessStarsPie.png> <../05_dataMining/distributionBusinessGeo.png>]
-<../05_dataMining/distributionUserRegisterTime.png, id=238, 894.7026pt x 351.23
+<../05_dataMining/distributionUserRegisterTime.png, id=276, 894.7026pt x 351.23
 22pt>
 File: ../05_dataMining/distributionUserRegisterTime.png Graphic file (type png)
 
@@ -469,7 +469,7 @@ File: ../05_dataMining/distributionUserRegisterTime.png Graphic file (type png)
 Package pdftex.def Info: ../05_dataMining/distributionUserRegisterTime.png  use
 d on input line 280.
 (pdftex.def)             Requested size: 480.59505pt x 188.66571pt.
-<../05_dataMining/distributionUserRegisterTimeStars.png, id=239, 878.8032pt x 3
+<../05_dataMining/distributionUserRegisterTimeStars.png, id=277, 878.8032pt x 3
 51.2322pt>
 File: ../05_dataMining/distributionUserRegisterTimeStars.png Graphic file (type
  png)
@@ -478,7 +478,7 @@ Package pdftex.def Info: ../05_dataMining/distributionUserRegisterTimeStars.png
   used on input line 288.
 (pdftex.def)             Requested size: 480.59505pt x 192.07964pt.
  [13 <../05_dataMining/distributionUserRegisterTime.png>]
-<../05_dataMining/eliteVSNormalUsers.png, id=248, 958.66154pt x 340.3917pt>
+<../05_dataMining/eliteVSNormalUsers.png, id=286, 958.66154pt x 340.3917pt>
 File: ../05_dataMining/eliteVSNormalUsers.png Graphic file (type png)
 <use ../05_dataMining/eliteVSNormalUsers.png>
 Package pdftex.def Info: ../05_dataMining/eliteVSNormalUsers.png  used on input
@@ -486,14 +486,14 @@ Package pdftex.def Info: ../05_dataMining/eliteVSNormalUsers.png  used on input
 (pdftex.def)             Requested size: 480.59505pt x 170.6421pt.
  [14 <../05_dataMining/distributionUserRegisterTimeStars.png> <../05_dataMining
 /eliteVSNormalUsers.png>]
-<../05_dataMining/distributionNumUserReviews.png, id=259, 901.2069pt x 319.7947
+<../05_dataMining/distributionNumUserReviews.png, id=295, 901.2069pt x 319.7947
 5pt>
 File: ../05_dataMining/distributionNumUserReviews.png Graphic file (type png)
 <use ../05_dataMining/distributionNumUserReviews.png>
 Package pdftex.def Info: ../05_dataMining/distributionNumUserReviews.png  used 
 on input line 304.
 (pdftex.def)             Requested size: 480.59505pt x 170.53954pt.
-<../05_dataMining/checkinTimeVSDay.png, id=260, 1182.0963pt x 516.0078pt>
+<../05_dataMining/checkinTimeVSDay.png, id=296, 1182.0963pt x 516.0078pt>
 File: ../05_dataMining/checkinTimeVSDay.png Graphic file (type png)
 <use ../05_dataMining/checkinTimeVSDay.png>
 Package pdftex.def Info: ../05_dataMining/checkinTimeVSDay.png  used on input l
@@ -501,39 +501,142 @@ ine 312.
 (pdftex.def)             Requested size: 480.59505pt x 209.793pt.
  [15 <../05_dataMining/distributionNumUserReviews.png> <../05_dataMining/checki
 nTimeVSDay.png>]
-<../05_dataMining/distributionUsefulWordCount.png, id=271, 1429.13925pt x 319.7
+<../05_dataMining/distributionUsefulWordCount.png, id=305, 1429.13925pt x 319.7
 9475pt>
 File: ../05_dataMining/distributionUsefulWordCount.png Graphic file (type png)
 <use ../05_dataMining/distributionUsefulWordCount.png>
 Package pdftex.def Info: ../05_dataMining/distributionUsefulWordCount.png  used
  on input line 320.
 (pdftex.def)             Requested size: 480.59505pt x 107.53813pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 326.
+<"../05_dataMining/Naive Bayes Confusion Matrix".png, id=306, 411.939pt x 333.6
+465pt>
+File: "../05_dataMining/Naive Bayes Confusion Matrix".png Graphic file (type pn
+g)
+<use "../05_dataMining/Naive Bayes Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/Naive Bayes Confusion Matrix".png  u
+sed on input line 331.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
+<"../05_dataMining/Logistic Regression Confusion Matrix".png, id=307, 411.939pt
+ x 333.6465pt>
+File: "../05_dataMining/Logistic Regression Confusion Matrix".png Graphic file 
+(type png)
+<use "../05_dataMining/Logistic Regression Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/Logistic Regression Confusion Matrix
+".png  used on input line 332.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
+<"../05_dataMining/Random Forest Confusion Matrix".png, id=308, 411.939pt x 333
+.6465pt>
+File: "../05_dataMining/Random Forest Confusion Matrix".png Graphic file (type 
+png)
+<use "../05_dataMining/Random Forest Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/Random Forest Confusion Matrix".png 
+ used on input line 333.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
 
 [16 <../05_dataMining/distributionUsefulWordCount.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 326.
+<"../05_dataMining/Logistic Regression Worst Words".png, id=315, 831.105pt x 46
+3.7325pt>
+File: "../05_dataMining/Logistic Regression Worst Words".png Graphic file (type
+ png)
+<use "../05_dataMining/Logistic Regression Worst Words".png>
+Package pdftex.def Info: "../05_dataMining/Logistic Regression Worst Words".png
+  used on input line 341.
+(pdftex.def)             Requested size: 240.29752pt x 134.07564pt.
+<"../05_dataMining/Logistic Regression Best Words".png, id=316, 831.105pt x 463
+.7325pt>
+File: "../05_dataMining/Logistic Regression Best Words".png Graphic file (type 
+png)
+<use "../05_dataMining/Logistic Regression Best Words".png>
+Package pdftex.def Info: "../05_dataMining/Logistic Regression Best Words".png 
+ used on input line 342.
+(pdftex.def)             Requested size: 240.29752pt x 134.07564pt.
+<"../05_dataMining/Random Forest Top Words".png, id=317, 831.105pt x 463.7325pt
+>
+File: "../05_dataMining/Random Forest Top Words".png Graphic file (type png)
+<use "../05_dataMining/Random Forest Top Words".png>
+Package pdftex.def Info: "../05_dataMining/Random Forest Top Words".png  used o
+n input line 348.
+(pdftex.def)             Requested size: 240.29752pt x 134.07564pt.
+ [17 <../05_dataMining/Naive Bayes Confusion Matrix.png> <../05_dataMining/Logi
+stic Regression Confusion Matrix.png> <../05_dataMining/Random Forest Confusion
+ Matrix.png> <../05_dataMining/Logistic Regression Worst Words.png> <../05_data
+Mining/Logistic Regression Best Words.png>]
+<../05_dataMining/ScreePlot.png, id=334, 623.6901pt x 374.1177pt>
+File: ../05_dataMining/ScreePlot.png Graphic file (type png)
+<use ../05_dataMining/ScreePlot.png>
+Package pdftex.def Info: ../05_dataMining/ScreePlot.png  used on input line 355
+.
+(pdftex.def)             Requested size: 288.35995pt x 172.96964pt.
+<"../05_dataMining/Logistic Regression(PCA) Confusion Matrix".png, id=335, 411.
+939pt x 333.6465pt>
+File: "../05_dataMining/Logistic Regression(PCA) Confusion Matrix".png Graphic 
+file (type png)
+<use "../05_dataMining/Logistic Regression(PCA) Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/Logistic Regression(PCA) Confusion M
+atrix".png  used on input line 364.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
+<"../05_dataMining/Random Forest(PCA) Confusion Matrix".png, id=336, 411.939pt 
+x 333.6465pt>
+File: "../05_dataMining/Random Forest(PCA) Confusion Matrix".png Graphic file (
+type png)
+<use "../05_dataMining/Random Forest(PCA) Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/Random Forest(PCA) Confusion Matrix"
+.png  used on input line 365.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
+<"../05_dataMining/AdaBoost(PCA) Confusion Matrix".png, id=337, 411.939pt x 333
+.6465pt>
+File: "../05_dataMining/AdaBoost(PCA) Confusion Matrix".png Graphic file (type 
+png)
+<use "../05_dataMining/AdaBoost(PCA) Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/AdaBoost(PCA) Confusion Matrix".png 
+ used on input line 366.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
+ [18 <../05_dataMining/Random Forest Top Words.png> <../05_dataMining/ScreePlot
+.png>]
+<"../05_dataMining/LDA(PCA) Confusion Matrix".png, id=346, 411.939pt x 333.6465
+pt>
+File: "../05_dataMining/LDA(PCA) Confusion Matrix".png Graphic file (type png)
+<use "../05_dataMining/LDA(PCA) Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/LDA(PCA) Confusion Matrix".png  used
+ on input line 372.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
+<"../05_dataMining/Decision Tree(PCA) Confusion Matrix".png, id=347, 411.939pt 
+x 333.6465pt>
+File: "../05_dataMining/Decision Tree(PCA) Confusion Matrix".png Graphic file (
+type png)
+<use "../05_dataMining/Decision Tree(PCA) Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/Decision Tree(PCA) Confusion Matrix"
+.png  used on input line 373.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
+<"../05_dataMining/KNN(PCA) Confusion Matrix".png, id=348, 411.939pt x 333.6465
+pt>
+File: "../05_dataMining/KNN(PCA) Confusion Matrix".png Graphic file (type png)
+<use "../05_dataMining/KNN(PCA) Confusion Matrix".png>
+Package pdftex.def Info: "../05_dataMining/KNN(PCA) Confusion Matrix".png  used
+ on input line 374.
+(pdftex.def)             Requested size: 158.59724pt x 128.45175pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 381.
+ [19 <../05_dataMining/Logistic Regression(PCA) Confusion Matrix.png> <../05_da
+taMining/Random Forest(PCA) Confusion Matrix.png> <../05_dataMining/AdaBoost(PC
+A) Confusion Matrix.png> <../05_dataMining/LDA(PCA) Confusion Matrix.png> <../0
+5_dataMining/Decision Tree(PCA) Confusion Matrix.png> <../05_dataMining/KNN(PCA
+) Confusion Matrix.png>] [20]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 381.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 326.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 326.
-
-
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: 4343E0DC69EA752F1352DC31519CC051;1515
-(rerunfilecheck)             After:  B275F6420A2A49D2CDE95CE1040490C3;2312.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 326.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 381.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 381.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: AF3D1FE87A88397AD62F7A8A7428E55D;2481.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 381.
  ) 
 Here is how much of TeX's memory you used:
- 9376 strings out of 492616
- 137221 string characters out of 6129482
+ 9474 strings out of 492616
+ 141148 string characters out of 6129482
  232824 words of memory out of 5000000
- 13062 multiletter control sequences out of 15000+600000
+ 13124 multiletter control sequences out of 15000+600000
  17731 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,9n,49p,1034b,1785s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,10n,49p,1034b,1785s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
 /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></u
@@ -543,10 +646,10 @@ ocal/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/loc
 al/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local
 /texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/local/t
 exlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on report.pdf (16 pages, 3311094 bytes).
+Output written on report.pdf (20 pages, 5929890 bytes).
 PDF statistics:
- 336 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
- 121 named destinations out of 1000 (max. 500000)
- 245 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 432 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 144 named destinations out of 1000 (max. 500000)
+ 390 words of extra memory for PDF output out of 10000 (max. 10000000)
 

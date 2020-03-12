@@ -29,3 +29,5 @@
 \BOOKMARK [3][-]{subsubsection.5.1.9}{User Checkin Time for Each Day in a Week}{subsection.5.1}% 29
 \BOOKMARK [3][-]{subsubsection.5.1.10}{Useful number VS Word Count in a Review}{subsection.5.1}% 30
 \BOOKMARK [2][-]{subsection.5.2}{Classification}{section.5}% 31
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Classification without PCA}{subsection.5.2}% 32
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Classification with PCA}{subsection.5.2}% 33
