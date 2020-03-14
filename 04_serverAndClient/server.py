@@ -217,8 +217,32 @@ def dpost():
         cur.execute('rollback;')
         return jsonify({"status": 1, "message": str(e)})
 
-
 # change username
+@app.route('/yelp/cn', methods=['POST'])
+def cn():
+    data = request.get_json()
+    try:
+        cur.execute('begin;')
+        cur.execute('UPDATE Users SET name =%s where user_id =%s', (data['username'], data['user_id']))
+        cur.execute('commit;')
+        return jsonify({"status": 0, "message": "Success"})
+    except Exception as e:
+        cur.execute('rollback;')
+        return jsonify({"status": 1, "message": str(e)})
+
+# get user info
+@app.route('/yelp/whoami', methods=['GET'])
+def whoami():
+    u = request.args.get('u')
+    if u:
+        try:
+            cur.execute('SELECT * from Users where user_id =%s;', (u,))
+            return jsonify({"status": 0, "message": cur.fetchall()})
+        except Exception as e:
+            return jsonify({"status": 1, "message": str(e)})
+    else:
+        return not_found(404)
+
 # get new posts with pages
 conn = mysql.connector.connect(user='root', password='password', host='127.0.0.1')
 cur = conn.cursor(dictionary=True)
