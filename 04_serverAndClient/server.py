@@ -118,7 +118,7 @@ def followb():
         cur.execute('rollback;')
         return jsonify({"status": 1, "message": str(e)})
 
-# Fetch all new posts by the followed people of a user
+# Fetch new posts by the followed people of a user
 @app.route('/yelp/uposts', methods=['GET'])
 def uposts():
     u = request.args.get('u')
@@ -141,18 +141,20 @@ def uposts():
     else:
         return not_found(404)
 
-# Fetch all new posts by the followed business of a user
+# Fetch new posts by the followed business of a user
 @app.route('/yelp/bposts', methods=['GET'])
 def bposts():
     u = request.args.get('u')
+    l = request.args.get('l')
     if u:
         try:
             cur.execute('begin;')
-            cur.execute(''' SELECT Reviews.review_id as review_id, Reviews.user_id as reviewer, Reviews.business_id as business_id, content 
-                            FROM BusinessFollowers
-                            INNER JOIN Reviews ON Reviews.business_id = BusinessFollowers.business_id
-                            LEFT JOIN ReadReviews ON Reviews.review_id = ReadReviews.review_id
-                            WHERE ReadReviews.review_id IS NULL AND BusinessFollowers.user_id=%s;''', (u,))
+            cur.execute(''' SELECT Reviews.review_id as review_id, Users.name as reviewer, Business.name as business_name, content, review_date
+                            FROM BusinessFollowers INNER JOIN Reviews USING(business_id)
+                            LEFT JOIN ReadReviews USING(review_id) INNER JOIN Business USING(business_id)
+                            INNER JOIN Users ON Reviews.user_id = Users.user_id
+                            WHERE ReadReviews.review_id IS NULL AND BusinessFollowers.user_id=%s
+                            ORDER BY review_date desc LIMIT %s;''', (u, l if l else 10000))
             res = cur.fetchall()
             for r in [x['review_id'] for x in res]:
                 cur.execute('INSERT INTO ReadReviews(user_id, review_id) VALUES (%s, %s);', (u, r))
