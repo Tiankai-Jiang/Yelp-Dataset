@@ -58,52 +58,6 @@ def star():
         cur.execute('rollback;')
         return jsonify({"status": 1, "message": str(e)})
 
-# Fetch all new posts by the followed people of a user
-@app.route('/yelp/ffposts', methods=['GET'])
-def ffposts():
-    u = request.args.get('u')
-    if u:
-        try:
-            cur.execute('begin;')
-            cur.execute(''' SELECT Reviews.review_id as review_id, Reviews.user_id as reviewer, business_id, content 
-                            FROM UserFollowers
-                            INNER JOIN Reviews ON Reviews.user_id = UserFollowers.user_id2
-                            LEFT JOIN ReadReviews ON Reviews.review_id = ReadReviews.review_id
-                            WHERE ReadReviews.review_id IS NULL AND UserFollowers.user_id1=%s;''', (u,))
-            res = cur.fetchall()
-            for r in [x['review_id'] for x in res]:
-                cur.execute('INSERT INTO ReadReviews(user_id, review_id) VALUES (%s, %s);', (u, r))
-            cur.execute('commit;')
-            return jsonify({"status": 0, "message": res})
-        except Exception as e:
-            cur.execute('rollback;')
-            return jsonify({"status": 1, "message": str(e)})
-    else:
-        return not_found(404)
-
-# Fetch all new posts by the followed business of a user
-@app.route('/yelp/fbposts', methods=['GET'])
-def fbposts():
-    u = request.args.get('u')
-    if u:
-        try:
-            cur.execute('begin;')
-            cur.execute(''' SELECT Reviews.review_id as review_id, Reviews.user_id as reviewer, Reviews.business_id as business_id, content 
-                            FROM BusinessFollowers
-                            INNER JOIN Reviews ON Reviews.business_id = BusinessFollowers.business_id
-                            LEFT JOIN ReadReviews ON Reviews.review_id = ReadReviews.review_id
-                            WHERE ReadReviews.review_id IS NULL AND BusinessFollowers.user_id=%s;''', (u,))
-            res = cur.fetchall()
-            for r in [x['review_id'] for x in res]:
-                cur.execute('INSERT INTO ReadReviews(user_id, review_id) VALUES (%s, %s);', (u, r))
-            cur.execute('commit;')
-            return jsonify({"status": 0, "message": res})
-        except Exception as e:
-            cur.execute('rollback;')
-            return jsonify({"status": 1, "message": str(e)})
-    else:
-        return not_found(404)
-
 # Initiate a new post
 @app.route('/yelp/newpost', methods=['POST'])
 def newpost():
@@ -164,6 +118,108 @@ def followb():
         cur.execute('rollback;')
         return jsonify({"status": 1, "message": str(e)})
 
+# Fetch all new posts by the followed people of a user
+@app.route('/yelp/uposts', methods=['GET'])
+def uposts():
+    u = request.args.get('u')
+    if u:
+        try:
+            cur.execute('begin;')
+            cur.execute(''' SELECT Reviews.review_id as review_id, Reviews.user_id as reviewer, business_id, content 
+                            FROM UserFollowers
+                            INNER JOIN Reviews ON Reviews.user_id = UserFollowers.user_id2
+                            LEFT JOIN ReadReviews ON Reviews.review_id = ReadReviews.review_id
+                            WHERE ReadReviews.review_id IS NULL AND UserFollowers.user_id1=%s;''', (u,))
+            res = cur.fetchall()
+            for r in [x['review_id'] for x in res]:
+                cur.execute('INSERT INTO ReadReviews(user_id, review_id) VALUES (%s, %s);', (u, r))
+            cur.execute('commit;')
+            return jsonify({"status": 0, "message": res})
+        except Exception as e:
+            cur.execute('rollback;')
+            return jsonify({"status": 1, "message": str(e)})
+    else:
+        return not_found(404)
+
+# Fetch all new posts by the followed business of a user
+@app.route('/yelp/bposts', methods=['GET'])
+def bposts():
+    u = request.args.get('u')
+    if u:
+        try:
+            cur.execute('begin;')
+            cur.execute(''' SELECT Reviews.review_id as review_id, Reviews.user_id as reviewer, Reviews.business_id as business_id, content 
+                            FROM BusinessFollowers
+                            INNER JOIN Reviews ON Reviews.business_id = BusinessFollowers.business_id
+                            LEFT JOIN ReadReviews ON Reviews.review_id = ReadReviews.review_id
+                            WHERE ReadReviews.review_id IS NULL AND BusinessFollowers.user_id=%s;''', (u,))
+            res = cur.fetchall()
+            for r in [x['review_id'] for x in res]:
+                cur.execute('INSERT INTO ReadReviews(user_id, review_id) VALUES (%s, %s);', (u, r))
+            cur.execute('commit;')
+            return jsonify({"status": 0, "message": res})
+        except Exception as e:
+            cur.execute('rollback;')
+            return jsonify({"status": 1, "message": str(e)})
+    else:
+        return not_found(404)
+
+# Fetch all my posts
+@app.route('/yelp/mposts', methods=['GET'])
+def mposts():
+    u = request.args.get('u')
+    if u:
+        try:
+            cur.execute('''SELECT review_id, name AS business_name, Reviews.stars AS stars, useful, funny, cool, content, review_date
+                FROM Reviews INNER JOIN Business USING(business_id) where user_id =%s;''', (u,))
+            return jsonify({"status": 0, "message": cur.fetchall()})
+        except Exception as e:
+            return jsonify({"status": 1, "message": str(e)})
+    else:
+        return not_found(404)
+
+@app.route('/yelp/followulist', methods=['GET'])
+def followulist():
+    u = request.args.get('u')
+    if u:
+        try:
+            cur.execute('SELECT user_id2 as user_id from UserFollowers where user_id1 =%s;', (u,))
+            return jsonify({"status": 0, "message": cur.fetchall()})
+        except Exception as e:
+            return jsonify({"status": 1, "message": str(e)})
+    else:
+        return not_found(404)
+
+@app.route('/yelp/followblist', methods=['GET'])
+def followblist():
+    u = request.args.get('u')
+    if u:
+        try:
+            cur.execute('SELECT business_id from BusinessFollowers where user_id =%s;', (u,))
+            return jsonify({"status": 0, "message": cur.fetchall()})
+        except Exception as e:
+            return jsonify({"status": 1, "message": str(e)})
+    else:
+        return not_found(404)
+
+# Delete my review
+@app.route('/yelp/dpost', methods=['POST'])
+def dpost():
+    data = request.get_json()
+    u = data['user_id']
+    r = data['review_id']
+    try:
+        cur.execute('begin;')
+        cur.execute('DELETE from Reviews where review_id =%s AND user_id = %s', (r, u))
+        cur.execute('commit;')
+        return jsonify({"status": 0, "message": "Success"})
+    except Exception as e:
+        cur.execute('rollback;')
+        return jsonify({"status": 1, "message": str(e)})
+
+
+# change username
+# get new posts with pages
 conn = mysql.connector.connect(user='root', password='password', host='127.0.0.1')
 cur = conn.cursor(dictionary=True)
 cur.execute("use yelp;")

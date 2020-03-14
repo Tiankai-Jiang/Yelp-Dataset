@@ -17,7 +17,9 @@ while(user_id==''):
         print(json.dumps(resp.json(), indent=1))
 
 while(True):
-    print('1) Star/Unstar a review\n2) New post\n3) Follow/Unfollow a user\n4) Follow/Unfollow a business\n5) Get new posts by people you followed\n6) Get new posts by business you followed\n7) Exit')
+    print('1) Star/Unstar a review\n2) New post\n3) Follow/Unfollow a user\n4) Follow/Unfollow a business')
+    print('5) Get new posts by people you followed\n6) Get new posts by business you followed')
+    print('7) Get all your posts\n8) Get all following users\n9) Get all following business\n10) Delete your review\n11) Exit')
     opt = sys.stdin.readline()[:-1]
     if opt == '1':
         print('Enter review_id:')
@@ -34,9 +36,25 @@ while(True):
         print('Enter the business_id you want to follow/unfollow:')
         resp = requests.post(url + 'followb', json = {'user_id': user_id, 'business_id': sys.stdin.readline()[:-1]})
     elif opt == '5':
-        resp = requests.get(url + 'ffposts?u=' + user_id)
+        resp = requests.get(url + 'uposts?u=' + user_id)
     elif opt == '6':
-        resp = requests.get(url + 'fbposts?u=' + user_id)
+        resp = requests.get(url + 'bposts?u=' + user_id)
+    elif opt == '7':
+        resp = requests.get(url + 'mposts?u=' + user_id)
+    elif opt == '8':
+        resp = requests.get(url + 'followulist?u=' + user_id)
+    elif opt == '9':
+        resp = requests.get(url + 'followblist?u=' + user_id)
+    elif opt == '10':
+        resp = requests.get(url + 'mposts?u=' + user_id)
+        m = resp.json()['message']
+        for count, ele in enumerate(m, 1):
+            print(str(count) + '.\nbusiness name: ' + ele['business_name'] + '\nreview snippet: ' + ele['content'][:50] + '...\nreview date: ' + ele['review_date'] + '\n\n')
+        print('Which review you want to delete?')
+        try:
+            resp = requests.post(url + 'dpost', json = {'user_id': user_id, 'review_id': m[int(sys.stdin.readline()[:-1])-1]['review_id']})
+        except:
+            print('Error')
     else:
         break
     print(json.dumps(resp.json(), indent=1))
