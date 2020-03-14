@@ -1,4 +1,5 @@
 import sys, requests, json
+
 url = 'http://127.0.0.1:5000/yelp/'
 user_id = ''
 while(user_id==''):
@@ -6,12 +7,12 @@ while(user_id==''):
     opt = sys.stdin.readline()[:-1]
     if opt == '1':
         print('Enter user_id:')
-        resp = requests.get(url + 'login?u=' + sys.stdin.readline()[:-1])
+        resp = requests.post(url + 'login', json = {'user_id': sys.stdin.readline()[:-1]})
         if resp.json()['status'] == 0: user_id = resp.json()['message']
         print(json.dumps(resp.json(), indent=1))
     elif opt == '2':
         print('Enter new username:')
-        resp = requests.get(url + 'newuser?n=' + sys.stdin.readline()[:-1])
+        resp = requests.post(url + 'newuser', json = {'username': sys.stdin.readline()[:-1]})
         if resp.json()['status'] == 0: user_id = resp.json()['message']
         print(json.dumps(resp.json(), indent=1))
 
@@ -20,18 +21,18 @@ while(True):
     opt = sys.stdin.readline()[:-1]
     if opt == '1':
         print('Enter review_id:')
-        resp = requests.get(url + 'star?u=' + user_id + '&r=' + sys.stdin.readline()[:-1])
+        resp = requests.post(url + 'star', json = {'user_id': user_id, 'review_id': sys.stdin.readline()[:-1]})
     elif opt == '2':
         print('Enter business_id:')
         bid = sys.stdin.readline()[:-1]
         print('Enter review content:')
-        resp = requests.get(url + 'newpost?u=' + user_id + '&b=' + bid + '&r=' + sys.stdin.readline()[:-1])
+        resp = requests.post(url + 'newpost', json = {'user_id': user_id, 'business_id': bid, 'content': sys.stdin.readline()[:-1]})
     elif opt == '3':
         print('Enter the user_id you want to follow/unfollow:')
-        resp = requests.get(url + 'followu?u=' + user_id + '&f=' + sys.stdin.readline()[:-1])
+        resp = requests.post(url + 'followu', json = {'user_id1': user_id, 'user_id2': sys.stdin.readline()[:-1]})
     elif opt == '4':
         print('Enter the business_id you want to follow/unfollow:')
-        resp = requests.get(url + 'followb?u=' + user_id + '&b=' + sys.stdin.readline()[:-1])
+        resp = requests.post(url + 'followb', json = {'user_id': user_id, 'business_id': sys.stdin.readline()[:-1]})
     elif opt == '5':
         resp = requests.get(url + 'ffposts?u=' + user_id)
     elif opt == '6':
