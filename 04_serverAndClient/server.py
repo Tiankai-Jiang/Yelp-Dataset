@@ -58,6 +58,20 @@ def star():
         cur.execute('rollback;')
         return jsonify({"status": 1, "message": str(e)})
 
+# Get all starred reviews
+@app.route('/yelp/stars', methods=['GET'])
+def stars():
+    if request.args.get('u'):
+        try:
+            cur.execute('''SELECT review_id as reviewID, Users.name as reviewer, Business.name as business, CONCAT(LEFT(content, 45), "...") as snippet, Reviews.stars from UserStars
+                            INNER JOIN Reviews USING(review_id) INNER JOIN Business USING(business_id)
+                            INNER JOIN Users on Reviews.user_id = Users.user_id WHERE UserStars.user_id = %s;''', (request.args.get('u'), ))
+            return jsonify({"status": 0, "message": cur.fetchall()})
+        except Exception as e:
+            return jsonify({"status": 1, "message": str(e)})
+    else:
+        return not_found(404)
+
 # Initiate a new post
 @app.route('/yelp/newpost', methods=['POST'])
 def newpost():
@@ -170,11 +184,10 @@ def bposts():
 # Fetch all my posts
 @app.route('/yelp/mposts', methods=['GET'])
 def mposts():
-    u = request.args.get('u')
-    if u:
+    if request.args.get('u'):
         try:
             cur.execute('''SELECT review_id, name AS business_name, Reviews.stars AS stars, useful, funny, cool, content, review_date
-                FROM Reviews INNER JOIN Business USING(business_id) where user_id =%s;''', (u,))
+                FROM Reviews INNER JOIN Business USING(business_id) where user_id =%s;''', (request.args.get('u'),))
             return jsonify({"status": 0, "message": cur.fetchall()})
         except Exception as e:
             return jsonify({"status": 1, "message": str(e)})
@@ -183,10 +196,9 @@ def mposts():
 
 @app.route('/yelp/followulist', methods=['GET'])
 def followulist():
-    u = request.args.get('u')
-    if u:
+    if request.args.get('u'):
         try:
-            cur.execute('SELECT user_id2 as user_id, name from UserFollowers INNER JOIN Users ON UserFollowers.user_id2 = Users.user_id where user_id1 = %s;', (u,))
+            cur.execute('SELECT user_id2 as user_id, name from UserFollowers INNER JOIN Users ON UserFollowers.user_id2 = Users.user_id where user_id1 = %s;', (request.args.get('u'),))
             return jsonify({"status": 0, "message": cur.fetchall()})
         except Exception as e:
             return jsonify({"status": 1, "message": str(e)})
@@ -195,10 +207,9 @@ def followulist():
 
 @app.route('/yelp/followblist', methods=['GET'])
 def followblist():
-    u = request.args.get('u')
-    if u:
+    if request.args.get('u'):
         try:
-            cur.execute('SELECT business_id, name, stars from BusinessFollowers INNER JOIN Business USING(business_id) where user_id =%s;', (u,))
+            cur.execute('SELECT business_id, name, stars from BusinessFollowers INNER JOIN Business USING(business_id) where user_id =%s;', (request.args.get('u'),))
             return jsonify({"status": 0, "message": cur.fetchall()})
         except Exception as e:
             return jsonify({"status": 1, "message": str(e)})
@@ -234,10 +245,9 @@ def cn():
 # get user info
 @app.route('/yelp/whoami', methods=['GET'])
 def whoami():
-    u = request.args.get('u')
-    if u:
+    if request.args.get('u'):
         try:
-            cur.execute('SELECT user_id, name, review_count as reviews, yelping_since, average_stars as stars, useful, funny, cool, fans from Users where user_id =%s;', (u,))
+            cur.execute('SELECT user_id, name, review_count as reviews, yelping_since, average_stars as stars, useful, funny, cool, fans from Users where user_id =%s;', (request.args.get('u'),))
             return jsonify({"status": 0, "message": cur.fetchall()})
         except Exception as e:
             return jsonify({"status": 1, "message": str(e)})

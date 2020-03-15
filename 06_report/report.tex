@@ -67,7 +67,7 @@ Extract all data for tables from json files into individual files, at the same t
 \section{Server and Client}\label{section-api}
 Flask is used as the web framework.
 \subsection{API}
-14 operations are supported in the API. The status in the responsed json will be 0 if the operation succeeded, otherwise 1, with the error message in message field.
+16 operations are supported in the API. The status in the responsed json will be 0 if the operation succeeded, otherwise 1, with the error message in message field.
 
 \subsubsection{Login}
 \textbf{Description:}\\
@@ -125,6 +125,34 @@ review\_id: an existing review\_id\\
 \begin{lstlisting}
 {
  "message": "Starred",
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
+
+\subsubsection{Get all Starred Reviews}
+\textbf{Description:}\\
+Retrieve all reviews you have starred.\\
+\textbf{Method:}\\
+GET\\
+\textbf{API call:}\\
+http://127.0.0.1:5000/yelp/stars?u=\{user\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": [
+  {
+   "business": "Pure Indian Cuisine",
+   "reviewID": "___-Bw8LtQgezPiN9xJWaQ",
+   "reviewer": "David",
+   "snippet": "Don't know how I missed this place after so m...",
+   "stars": 6.0
+  }
+ ],
  "status": 0
 }
 \end{lstlisting}
