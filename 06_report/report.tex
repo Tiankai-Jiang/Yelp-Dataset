@@ -67,13 +67,15 @@ Extract all data for tables from json files into individual files, at the same t
 \section{Server and Client}\label{section-api}
 Flask is used as the web framework.
 \subsection{API}
-8 operations are supported in the API. The status in the responsed json will be 0 if the operation succeeded, otherwise 1, with the error message in message field.
+14 operations are supported in the API. The status in the responsed json will be 0 if the operation succeeded, otherwise 1, with the error message in message field.
 
 \subsubsection{Login}
 \textbf{Description:}\\
 Login as an existing user.\\
+\textbf{Method:}\\
+POST\\
 \textbf{API call:}\\ 
-http://127.0.0.1:5000/yelp/login?u=\{user\_id\}\\
+http://127.0.0.1:5000/yelp/login\\
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
 \textbf{API Response:}
@@ -90,8 +92,10 @@ user\_id: your user\_id\\
 \subsubsection{Register}
 \textbf{Description:}\\
 Register a new user account.\\
+\textbf{Method:}\\
+POST\\
 \textbf{API call:}\\
-http://127.0.0.1:5000/yelp/newuser?n=\{username\}\\
+http://127.0.0.1:5000/yelp/newuser\\
 \textbf{Parameters:}\\
 username: username for the new account\\
 \textbf{API Response:}
@@ -108,8 +112,10 @@ username: username for the new account\\
 \subsubsection{Star/Unstar}
 \textbf{Description:}\\
 Star/Unstar a review.\\
+\textbf{Method:}\\
+POST\\
 \textbf{API call:}\\
-http://127.0.0.1:5000/yelp/star?u=\{user\_id\}\&r=\{review\_id\}\\
+http://127.0.0.1:5000/yelp/star\\
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
 review\_id: an existing review\_id\\
@@ -127,8 +133,10 @@ review\_id: an existing review\_id\\
 \subsubsection{New Review}
 \textbf{Description:}\\
 Post a new review\\
+\textbf{Method:}\\
+POST\\
 \textbf{API call:}\\
-http://127.0.0.1:5000/yelp/newpost?u=\{user\_id\}\&b=\{business\_id\}\&r=\{content\}\\
+http://127.0.0.1:5000/yelp/newpost\\
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
 business\_id: the business\_id of the business you want to comment on\\
@@ -147,8 +155,10 @@ content: review content\\
 \subsubsection{Follow/Unfollow a User}
 \textbf{Description:}\\
 Follow/Unfollow a user.\\
+\textbf{Method:}\\
+POST\\
 \textbf{API call:}\\
-http://127.0.0.1:5000/yelp/followu?u=\{user\_id1\}\&f=\{user\_id2\}\\
+http://127.0.0.1:5000/yelp/followu\\
 \textbf{Parameters:}\\
 user\_id1: your user\_id\\
 user\_id2: user\_id of the person you want to follow\\
@@ -166,8 +176,10 @@ user\_id2: user\_id of the person you want to follow\\
 \subsubsection{Follow/Unfollow a Business}
 \textbf{Description:}\\
 Follow/Unfollow a business.\\
+\textbf{Method:}\\
+POST\\
 \textbf{API call:}\\
-http://127.0.0.1:5000/yelp/followb?u=\{user\_id\}\&b=\{business\_id\}\\
+http://127.0.0.1:5000/yelp/followb\\
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
 business\_id: business\_id of the business you want to follow\\
@@ -185,10 +197,13 @@ business\_id: business\_id of the business you want to follow\\
 \subsubsection{Get All New Reviews1}
 \textbf{Description:}\\
 Get all new reviews by people you have followed.\\
+\textbf{Method:}\\
+GET\\
 \textbf{API call:}\\ 
-http://127.0.0.1:5000/yelp/ffposts?u=\{user\_id\}\\
+http://127.0.0.1:5000/yelp/uposts?u=\{user\_id\}\&l=\{number\}\\
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
+number(optional): number of posts to get, or empty to retrieve all\\
 \textbf{API Response:}
 
 \begin{singlespacing}
@@ -196,13 +211,18 @@ user\_id: your user\_id\\
 {
  "message": [
   {
-   "business_id": "Review content1",
-   "reviewer": "___DPmKJsBF2X6ZKgAeGqg"
+   "business_name": "Brake Masters",
+   "review_id": "c4B3NGDZbQnRgbe4fw6qGw",
+   "content": "review content 1",
+   "reviewer": "Charlotte",
+   "review_date": "Thu, 22 May 2014 20:20:14 GMT"
   },
   {
-   "business_id": "Review content2",
+   "business_name": "The Watershed",
    "review_id": "GGg4KdkyvbdHwdwsC46l7g",
-   "reviewer": "___DPmKJsBF2X6ZKgAeGqg"
+   "content": "review content 2",
+   "reviewer": "Charlotte",
+   "review_date": "Mon, 03 Aug 2015 22:26:54 GMT"
   }
  ],
  "status": 0
@@ -213,8 +233,46 @@ user\_id: your user\_id\\
 \subsubsection{Get All New Reviews2}
 \textbf{Description:}\\
 Get all new reviews of the business you have followed.\\
+\textbf{Method:}\\
+GET\\
 \textbf{API call:}\\ 
-http://127.0.0.1:5000/yelp/fbposts?u=\{user\_id\}\\
+http://127.0.0.1:5000/yelp/bposts?u=\{user\_id\}\&l=\{number\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+number(optional): number of posts to get, or empty to retrieve all\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": [
+  {
+   "business_name": "Brake Masters",
+   "review_id": "c4B3NGDZbQnRgbe4fw6qGw",
+   "content": "review content 1",
+   "reviewer": "Charlotte",
+   "review_date": "Thu, 22 May 2014 20:20:14 GMT"
+  },
+  {
+   "business_name": "The Watershed",
+   "review_id": "GGg4KdkyvbdHwdwsC46l7g",
+   "content": "review content 2",
+   "reviewer": "Charlotte",
+   "review_date": "Mon, 03 Aug 2015 22:26:54 GMT"
+  }
+ ],
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
+
+\subsubsection{My Reviews}
+\textbf{Description:}\\
+Get all your posted reviews\\
+\textbf{Method:}\\
+GET\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/mposts?u=\{user\_id\}\\
 \textbf{Parameters:}\\
 user\_id: your user\_id\\
 \textbf{API Response:}
@@ -224,15 +282,166 @@ user\_id: your user\_id\\
 {
  "message": [
   {
-   "business_id": "Review content1",
-   "reviewer": "___DPmKJsBF2X6ZKgAeGqg"
-  },
-  {
-   "business_id": "Review content2",
-   "review_id": "GGg4KdkyvbdHwdwsC46l7g",
-   "reviewer": "___QCazm0YrHLd3uNUPYMA"
+   "business_name": "The Range 702",
+   "content": "review content",
+   "cool": 0,
+   "funny": 0,
+   "review_date": "Wed, 05 Aug 2015 07:20:13 GMT",
+   "review_id": "Ph4MAecNE-sTQK1Fnf6E7Q",
+   "stars": 5.0,
+   "useful": 0
   }
  ],
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
+
+\subsubsection{Followed Users}
+\textbf{Description:}\\
+Get all your followed users.\\
+\textbf{Method:}\\
+GET\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/followulist?u=\{user\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": [
+  {
+   "name": "Charlotte",
+   "user_id": "___DPmKJsBF2X6ZKgAeGqg"
+  }
+ ],
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
+
+\subsubsection{Followed Business}
+\textbf{Description:}\\
+Get all your followed business.\\
+\textbf{Method:}\\
+GET\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/followblist?u=\{user\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": [
+  {
+   "business_id": "__1uG7MLxWGFIv2fCGPiQQ",
+   "name": "SpinalWorks Chiropractic",
+   "stars": 5.0
+  },
+  {
+   "business_id": "9Q1ZtzTPFWG4fJiFSko5Xg",
+   "name": "Cantina Laredo",
+   "stars": 3.5
+  }
+ ],
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
+
+\subsubsection{Delete Review}
+\textbf{Description:}\\
+Remove your posted review.\\
+\textbf{Method:}\\
+POST\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/dpost?u=\{user\_id\}\&r=\{review\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+review\_id: the id of the review you want to delete\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": "Success",
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
+
+\subsubsection{Change username}
+\textbf{Description:}\\
+Change your account username.\\
+\textbf{Method:}\\
+POST\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/cn\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+username: the username you want to set\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": "Success",
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
+
+\subsubsection{Who Am I}
+\textbf{Description:}\\
+Display your account information.\\
+\textbf{Method:}\\
+GET\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/whoami?u=\{user\_id\}\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": [
+  {
+   "cool": 0,
+   "fans": 0,
+   "funny": 0,
+   "name": "Mike",
+   "reviews": 5,
+   "stars": 5.0,
+   "useful": 1,
+   "user_id": "___QCazm0YrHLd3uNUPYMA",
+   "yelping_since": "Thu, 31 Jul 2014 21:53:24 GMT"
+  }
+ ],
+ "status": 0
+}
+\end{lstlisting}
+\end{singlespacing}
+
+\subsubsection{Reset}
+\textbf{Description:}\\
+Reset read history so that you can see the read reviews again.\\
+\textbf{Method:}\\
+POST\\
+\textbf{API call:}\\ 
+http://127.0.0.1:5000/yelp/reset\\
+\textbf{Parameters:}\\
+user\_id: your user\_id\\
+\textbf{API Response:}
+
+\begin{singlespacing}
+\begin{lstlisting}
+{
+ "message": "Success",
  "status": 0
 }
 \end{lstlisting}

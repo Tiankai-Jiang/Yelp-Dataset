@@ -26,7 +26,7 @@ while(True):
     print('1) Star/Unstar a review\n2) New post\n3) Follow/Unfollow a user\n4) Follow/Unfollow a business')
     print('5) Get new posts by people you followed\n6) Get new posts by business you followed')
     print('7) Get all your posts\n8) Get all following users\n9) Get all following business\n10) Delete your review')
-    print('11) Change username\n12) Who am I\n13) Exit')
+    print('11) Change username\n12) Who am I\n13) Clean review history\n14) Exit')
     opt = sys.stdin.readline()[:-1]
     if opt == '1':
         print('Enter review_id:')
@@ -71,8 +71,11 @@ while(True):
         resp = requests.post(url + 'cn', json = {'user_id': user_id, 'username': sys.stdin.readline()[:-1]})
     elif opt == '12':
         resp = requests.get(url + 'whoami?u=' + user_id)
+    elif opt == '13':
+        resp = requests.post(url + 'reset', json = {'user_id': user_id})
     else:
         sys.exit()
+    # print(json.dumps(resp.json(), indent = 1))
     r = resp.json()['message']
     print("\033c", end="")
     if isinstance(r, list):

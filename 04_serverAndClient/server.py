@@ -209,11 +209,9 @@ def followblist():
 @app.route('/yelp/dpost', methods=['POST'])
 def dpost():
     data = request.get_json()
-    u = data['user_id']
-    r = data['review_id']
     try:
         cur.execute('begin;')
-        cur.execute('DELETE from Reviews where review_id =%s AND user_id = %s', (r, u))
+        cur.execute('DELETE from Reviews where review_id =%s AND user_id = %s', (data['review_id'], data['user_id']))
         cur.execute('commit;')
         return jsonify({"status": 0, "message": "Success"})
     except Exception as e:
@@ -246,7 +244,18 @@ def whoami():
     else:
         return not_found(404)
 
-# get new posts with pages
+# Delete my review
+@app.route('/yelp/reset', methods=['POST'])
+def reset():
+    try:
+        cur.execute('begin;')
+        cur.execute('DELETE from ReadReviews where user_id = %s', (request.get_json()['user_id'], ))
+        cur.execute('commit;')
+        return jsonify({"status": 0, "message": "Success"})
+    except Exception as e:
+        cur.execute('rollback;')
+        return jsonify({"status": 1, "message": str(e)})
+
 conn = mysql.connector.connect(user='root', password='password', host='127.0.0.1')
 cur = conn.cursor(dictionary=True)
 cur.execute("use yelp;")
