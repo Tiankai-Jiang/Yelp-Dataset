@@ -186,7 +186,7 @@ def followulist():
     u = request.args.get('u')
     if u:
         try:
-            cur.execute('SELECT user_id2 as user_id from UserFollowers where user_id1 =%s;', (u,))
+            cur.execute('SELECT user_id2 as user_id, name from UserFollowers INNER JOIN Users ON UserFollowers.user_id2 = Users.user_id where user_id1 = %s;', (u,))
             return jsonify({"status": 0, "message": cur.fetchall()})
         except Exception as e:
             return jsonify({"status": 1, "message": str(e)})
@@ -198,7 +198,7 @@ def followblist():
     u = request.args.get('u')
     if u:
         try:
-            cur.execute('SELECT business_id from BusinessFollowers where user_id =%s;', (u,))
+            cur.execute('SELECT business_id, name, stars from BusinessFollowers INNER JOIN Business USING(business_id) where user_id =%s;', (u,))
             return jsonify({"status": 0, "message": cur.fetchall()})
         except Exception as e:
             return jsonify({"status": 1, "message": str(e)})
@@ -239,7 +239,7 @@ def whoami():
     u = request.args.get('u')
     if u:
         try:
-            cur.execute('SELECT * from Users where user_id =%s;', (u,))
+            cur.execute('SELECT user_id, name, review_count as reviews, yelping_since, average_stars as stars, useful, funny, cool, fans from Users where user_id =%s;', (u,))
             return jsonify({"status": 0, "message": cur.fetchall()})
         except Exception as e:
             return jsonify({"status": 1, "message": str(e)})

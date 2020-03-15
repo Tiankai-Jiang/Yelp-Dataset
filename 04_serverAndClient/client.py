@@ -1,20 +1,26 @@
-import sys, requests, json
+import sys, requests, json, os
+from prettytable import PrettyTable, ALL
+from textwrap import fill
 
 url = 'http://127.0.0.1:5000/yelp/'
 user_id = ''
 while(user_id==''):
-    print('1) Login\n2) Register')
+    print('1) Login\n2) Register\n3) Exit')
     opt = sys.stdin.readline()[:-1]
+    table = PrettyTable(field_names=['Message'], align='l', hrules=ALL)
     if opt == '1':
         print('Enter user_id:')
         resp = requests.post(url + 'login', json = {'user_id': sys.stdin.readline()[:-1]})
-        if resp.json()['status'] == 0: user_id = resp.json()['message']
-        print(json.dumps(resp.json(), indent=1))
     elif opt == '2':
         print('Enter new username:')
         resp = requests.post(url + 'newuser', json = {'username': sys.stdin.readline()[:-1]})
-        if resp.json()['status'] == 0: user_id = resp.json()['message']
-        print(json.dumps(resp.json(), indent=1))
+    else:
+        sys.exit()
+    print("\033c", end="")
+    if resp.json()['status'] == 0: user_id = resp.json()['message']
+    table.add_row(['Success'] if resp.json()['status'] == 0 else [resp.json()['message']])
+    print(table)
+    print()
 
 while(True):
     print('1) Star/Unstar a review\n2) New post\n3) Follow/Unfollow a user\n4) Follow/Unfollow a business')
@@ -51,18 +57,35 @@ while(True):
     elif opt == '10':
         resp = requests.get(url + 'mposts?u=' + user_id)
         m = resp.json()['message']
-        for count, ele in enumerate(m, 1):
-            print(str(count) + '.\nbusiness name: ' + ele['business_name'] + '\nreview snippet: ' + ele['content'][:50] + '...\nreview date: ' + ele['review_date'] + '\n\n')
-        print('Which review you want to delete?')
+        table = PrettyTable(field_names=['No', 'business name', 'review snippet', 'review date'], align='l', hrules=ALL)
+        [table.add_row([str(count), ele['business_name'], ele['content'][:50] + '...', fill(ele['review_date'], width=20)]) for count, ele in enumerate(m, 1)]
+        print(table)
+        print('\nWhich review you want to delete?')
         try:
             resp = requests.post(url + 'dpost', json = {'user_id': user_id, 'review_id': m[int(sys.stdin.readline()[:-1])-1]['review_id']})
         except:
-            print('Error')
+            resp = requests.models.Response()
+            resp._content = b'{"status" : 1, "message": "Invalid No"}'
     elif opt == '11':
         print('Enter new username:')
         resp = requests.post(url + 'cn', json = {'user_id': user_id, 'username': sys.stdin.readline()[:-1]})
     elif opt == '12':
         resp = requests.get(url + 'whoami?u=' + user_id)
     else:
-        break
-    print(json.dumps(resp.json(), indent=1))
+        sys.exit()
+    r = resp.json()['message']
+    print("\033c", end="")
+    if isinstance(r, list):
+        if r:
+            table = PrettyTable(field_names=[*r[0]], align='l', hrules=ALL)
+            [table.add_row([fill(str(y), width=50) for y in list(x.values())]) for x in r]
+            print(table.get_string(fields=[x for x in [*r[0]] if x not in {'review_id', 'review_date'}]))
+        else:
+            table = PrettyTable(field_names=['Message'], align='l', hrules=ALL)
+            table.add_row(['Empty result set'])
+            print(table)
+    else:
+        table = PrettyTable(field_names=['Message'], align='l', hrules=ALL)
+        table.add_row([fill(r, width=50)])
+        print(table)
+    print()
