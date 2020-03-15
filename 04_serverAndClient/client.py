@@ -37,9 +37,11 @@ while(True):
         print('Enter the business_id you want to follow/unfollow:')
         resp = requests.post(url + 'followb', json = {'user_id': user_id, 'business_id': sys.stdin.readline()[:-1]})
     elif opt == '5':
-        resp = requests.get(url + 'uposts?u=' + user_id)
+        print('Number of reviews you want(or press Enter to retrieve all)')
+        resp = requests.get(url + 'uposts?u=' + user_id + '&l=' + sys.stdin.readline()[:-1])
     elif opt == '6':
-        resp = requests.get(url + 'bposts?u=' + user_id)
+        print('Number of reviews you want(or press Enter to retrieve all)')
+        resp = requests.get(url + 'bposts?u=' + user_id + '&l=' + sys.stdin.readline()[:-1])
     elif opt == '7':
         resp = requests.get(url + 'mposts?u=' + user_id)
     elif opt == '8':

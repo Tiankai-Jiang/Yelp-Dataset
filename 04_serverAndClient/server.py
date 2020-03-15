@@ -122,14 +122,15 @@ def followb():
 @app.route('/yelp/uposts', methods=['GET'])
 def uposts():
     u = request.args.get('u')
+    l = request.args.get('l')
     if u:
         try:
             cur.execute('begin;')
-            cur.execute(''' SELECT Reviews.review_id as review_id, Reviews.user_id as reviewer, business_id, content 
-                            FROM UserFollowers
-                            INNER JOIN Reviews ON Reviews.user_id = UserFollowers.user_id2
-                            LEFT JOIN ReadReviews ON Reviews.review_id = ReadReviews.review_id
-                            WHERE ReadReviews.review_id IS NULL AND UserFollowers.user_id1=%s;''', (u,))
+            cur.execute(''' SELECT Reviews.review_id as review_id, Users.name as reviewer, Business.name as business_name, content, review_date
+                            FROM UserFollowers INNER JOIN Reviews ON Reviews.user_id = UserFollowers.user_id2
+                            LEFT JOIN ReadReviews USING(review_id) INNER JOIN Users ON Reviews.user_id = Users.user_id
+                            INNER JOIN Business USING(business_id) WHERE ReadReviews.review_id IS NULL 
+                            AND UserFollowers.user_id1=%s ORDER BY review_date LIMIT %s;''', (u, int(l) if l else 10000))
             res = cur.fetchall()
             for r in [x['review_id'] for x in res]:
                 cur.execute('INSERT INTO ReadReviews(user_id, review_id) VALUES (%s, %s);', (u, r))
@@ -154,7 +155,7 @@ def bposts():
                             LEFT JOIN ReadReviews USING(review_id) INNER JOIN Business USING(business_id)
                             INNER JOIN Users ON Reviews.user_id = Users.user_id
                             WHERE ReadReviews.review_id IS NULL AND BusinessFollowers.user_id=%s
-                            ORDER BY review_date desc LIMIT %s;''', (u, l if l else 10000))
+                            ORDER BY review_date desc LIMIT %s;''', (u, int(l) if l else 10000))
             res = cur.fetchall()
             for r in [x['review_id'] for x in res]:
                 cur.execute('INSERT INTO ReadReviews(user_id, review_id) VALUES (%s, %s);', (u, r))
