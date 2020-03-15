@@ -38,9 +38,9 @@ def login():
 @app.route('/yelp/star', methods=['POST'])
 def star():
     data = request.get_json()
-    u = data['user_id']
-    r = data['review_id']
     try:
+        u = data['user_id']
+        r = data['review_id']
         cur.execute('SELECT count(*) as c FROM UserStars WHERE user_id=%s AND review_id=%s ;', (u, r))
         if cur.fetchone()['c'] > 0:
             cur.execute('begin;')
@@ -76,11 +76,11 @@ def newpost():
 @app.route('/yelp/followu', methods=['POST'])
 def followu():
     data = request.get_json()
-    u = data['user_id1']
-    f = data['user_id2']
-    if u == f:
-        return jsonify({"status": 1, "message": "You cannot follow yourself!"})
     try:
+        u = data['user_id1']
+        f = data['user_id2']
+        if u == f:
+            return jsonify({"status": 1, "message": "You cannot follow yourself!"})
         cur.execute('SELECT count(*) as c FROM UserFollowers WHERE user_id1=%s AND user_id2=%s ;', (u, f))
         if cur.fetchone()['c'] > 0:
             cur.execute('begin;')
@@ -100,9 +100,9 @@ def followu():
 @app.route('/yelp/followb', methods=['POST'])
 def followb():
     data = request.get_json()
-    u = data['user_id']
-    b = data['business_id']
     try:
+        u = data['user_id']
+        b = data['business_id']
         cur.execute('SELECT count(*) as c FROM BusinessFollowers WHERE user_id=%s AND business_id=%s ;', (u, b))
         if cur.fetchone()['c'] > 0:
             cur.execute('begin;')
