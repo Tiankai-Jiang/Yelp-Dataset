@@ -2,3 +2,4 @@ raw.nosync/*
 .idea/*
 venv/*
 .DS_Store
+*.mp4
