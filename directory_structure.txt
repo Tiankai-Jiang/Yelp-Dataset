@@ -41,7 +41,6 @@
 │   ├── 12_insertCheckin.py
 │   └── 13_insertPhotos.py
 ├── 04_serverAndClient
-│   ├── apiTest.sql
 │   ├── client.py
 │   └── server.py
 ├── 05_dataMining
@@ -50,10 +49,14 @@
 │   ├── AdaBoost(PCA)\ Confusion\ Matrix.png
 │   ├── Decision\ Tree(PCA)\ Confusion\ Matrix.png
 │   ├── KNN(PCA)\ Confusion\ Matrix.png
+│   ├── LDA(PCA)\ Confusion\ Matrix.png
+│   ├── Logistic\ Regression\ Best\ Words.png
 │   ├── Logistic\ Regression\ Confusion\ Matrix.png
+│   ├── Logistic\ Regression\ Worst\ Words.png
 │   ├── Logistic\ Regression(PCA)\ Confusion\ Matrix.png
 │   ├── Naive\ Bayes\ Confusion\ Matrix.png
 │   ├── Random\ Forest\ Confusion\ Matrix.png
+│   ├── Random\ Forest\ Top\ Words.png
 │   ├── Random\ Forest(PCA)\ Confusion\ Matrix.png
 │   ├── SHP
 │   │   ├── USA_Canada_ShapefileMerge.dbf
@@ -63,6 +66,7 @@
 │   │   ├── USA_Canada_ShapefileMerge.shp
 │   │   ├── USA_Canada_ShapefileMerge.shp.xml
 │   │   └── USA_Canada_ShapefileMerge.shx
+│   ├── ScreePlot.png
 │   ├── checkinTimeVSDay.png
 │   ├── distributionAllCategories.png
 │   ├── distributionBusinessGeo.png
@@ -76,11 +80,14 @@
 │   ├── eliteVSNormalUsers.png
 │   └── getSample.py
 ├── 06_report
+│   ├── ER_Diagram.pdf
+│   ├── ER_Diagram.png
 │   ├── report.aux
 │   ├── report.log
 │   ├── report.out
 │   ├── report.pdf
 │   └── report.tex
+├── Demo.mp4
 ├── README.md
 ├── directory_structure.txt
 ├── project.pdf
@@ -144,4 +151,4 @@
             ├── user6.json
             └── user7.json
 
-12 directories, 132 files
+12 directories, 139 files
