@@ -2,11 +2,11 @@
 
 A project to 
 
-- build relational database of yelp dataset using MySQL
+- build relational database of [yelp dataset](https://www.yelp.com/dataset) using MySQL
 
 - build a simple server-client using Flask
 
-- perform data mining on the dataset
+- perform data mining on the dataset(data visualization and classification on user comments)
 
 # Dependencies
 
@@ -39,6 +39,8 @@ A project to
 - 04: Flask server and client
 
 - 05: Data mining
+
+The dataset is too large to be uploaded. The directory structure was exported in directory_structure.txt for reference.
 
 # Demo
 
