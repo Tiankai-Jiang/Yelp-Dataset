@@ -3,3 +3,4 @@ raw.nosync/*
 venv/*
 .DS_Store
 *.mp4
+.gradle/*
